@@ -22,8 +22,8 @@ public class Grafo {
 	}
 
 	public void agregarArista(int origen, int destino, int costo) {
-		matrizAdyacencia[origen - 1][destino - 1] = costo;
-		matrizAdyacencia[destino - 1][origen - 1] = costo;// no dirigido
+		matrizAdyacencia[origen][destino] = costo;
+		matrizAdyacencia[destino][origen] = costo;// no dirigido
 	}
 
 	public void aplicarFloyd() {
