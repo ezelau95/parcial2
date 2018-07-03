@@ -1,9 +1,7 @@
 package empresa;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Grafo {
 
@@ -29,20 +27,23 @@ public class Grafo {
 	}
 
 	public void aplicarFloyd() {
+		
 		for (int k = 0; k <= dimension - 1; k++) {
 			for (int i = 0; i <= dimension - 1; i++) {
 				for (int j = 0; j <= dimension - 1; j++)
 
-					if (matrizAdyacencia[i][k] != -1 && matrizAdyacencia[k][j] != -1) {
+					if (i == j) {
+						matrizAdyacencia[i][j] = 0;
+					} else if (matrizAdyacencia[i][k] != -1 && matrizAdyacencia[k][j] != -1) {
 						matrizAdyacencia[i][j] = funcionfloyd(matrizAdyacencia[i][j],
 								matrizAdyacencia[i][k] + matrizAdyacencia[k][j]);
 					}
 			}
 		}
-		
+
 		obtenerMaximo();
 	}
-	
+
 	private int funcionfloyd(int i, int j) {
 
 		if (i == -1 && j == -1) {
@@ -57,13 +58,13 @@ public class Grafo {
 			return i;
 		}
 	}
-	
+
 	private void obtenerMaximo() {
 
 		for (int i = 0; i < dimension; i++) {
 			for (int j = 0; j < dimension; j++) {
 				if (matrizAdyacencia[i][j] > distanciaMax) {
-					distanciaMax = matrizAdyacencia[i][j]; 
+					distanciaMax = matrizAdyacencia[i][j];
 				}
 			}
 		}
@@ -72,11 +73,11 @@ public class Grafo {
 	public int getDistanciaMax() {
 		return this.distanciaMax;
 	}
-	
+
 	public List<Integer> getNodosDistMax() {
-		
+
 		ArrayList<Integer> listaNodos = new ArrayList<Integer>();
-		
+
 		for (int i = 0; i < dimension; i++) {
 			for (int j = 0; j < dimension; j++) {
 				if (matrizAdyacencia[i][j] == distanciaMax) {
@@ -89,7 +90,7 @@ public class Grafo {
 				}
 			}
 		}
-		
+
 		return listaNodos;
 	}
 }
